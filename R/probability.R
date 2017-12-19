@@ -1,6 +1,6 @@
 #' Single variable Rejection Sampling
 #'
-#' This function 'PoneD(f,N,lb,up)' shows the probability of the given pdf (with one r.v.) the situation could be smaller than,
+#' This function 'prooneD(f,N,lb,up,vall,valu)' shows the probability of the given pdf (with one r.v.) the situation could be smaller than,
 #' large than or between any range
 #'
 #'
@@ -8,8 +8,8 @@
 #' @param N the nimber of attempted samples.
 #' @param lb lower bound of support of f
 #' @param ub upper bound of support of f
-#' @param vall  lower value
-#' @param valu  upper value
+#' @param vall  lower value, default is -Inf
+#' @param valu  upper value, default is Inf
 #'
 #' @return  probability of given pdf (with one r.v.) and situation
 #'
