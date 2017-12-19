@@ -31,31 +31,32 @@
 #'oneDsampleplot(oneDsample(f,50000,0,2*pi))
 #'
 #'
-unif<-function(f, N=50000, lb, ub){
-  maxf<-optimize(f,c(lb,ub),maximum = TRUE)
-  maxf<-maxf$objective
-  data.frame(x = replicate(N, {sx <- runif(1, lb, ub);ifelse(runif(1,0,maxf) < f(sx), sx, NA)}))
-}
-norm<-function(f, N=50000){
-  x<-runif(100000,-1000,1000)
-  maxf<-max(f(x))
-  a=x[which( f(x) == maxf )]
-  a=mean(a)
-  sd = 2/maxf
-  c= 2*maxf/dnorm(a,a,sd)
-  data.frame(x = replicate(N, {sx <- rnorm(1,a,sd); ifelse( runif(1,0,c*dnorm(sx,a,sd)) < f(sx), sx, NA)}))
-}
-t<-function(f,N=50000){
-  x<-runif(100000,-1000,1000)
-  maxf<-max(f(x))
-  a=x[which( f(x) == maxf )]
-  a=mean(a)
-  sd=2/maxf
-  c=2*maxf/dt.scaled(a,df=1,mean=a,sd)
-  data.frame(x = replicate(N, {sx <- rt.scaled(1,1,mean=a,sd);
-  ifelse( runif(1,0,c*dt.scaled(sx,df=1,mean=a,sd)) < f(sx), sx, NA)}))
-}
+
 oneDsample <- function(f, N=50000, lb=Inf, ub=Inf,method='best') {
+  unif<-function(f, N=50000, lb, ub){
+    maxf<-optimize(f,c(lb,ub),maximum = TRUE)
+    maxf<-maxf$objective
+    data.frame(x = replicate(N, {sx <- runif(1, lb, ub);ifelse(runif(1,0,maxf) < f(sx), sx, NA)}))
+  }
+  norm<-function(f, N=50000){
+    x<-runif(100000,-1000,1000)
+    maxf<-max(f(x))
+    a=x[which( f(x) == maxf )]
+    a=mean(a)
+    sd = 2/maxf
+    c= 2*maxf/dnorm(a,a,sd)
+    data.frame(x = replicate(N, {sx <- rnorm(1,a,sd); ifelse( runif(1,0,c*dnorm(sx,a,sd)) < f(sx), sx, NA)}))
+  }
+  t<-function(f,N=50000){
+    x<-runif(100000,-1000,1000)
+    maxf<-max(f(x))
+    a=x[which( f(x) == maxf )]
+    a=mean(a)
+    sd=2/maxf
+    c=2*maxf/dt.scaled(a,df=1,mean=a,sd)
+    data.frame(x = replicate(N, {sx <- rt.scaled(1,1,mean=a,sd);
+    ifelse( runif(1,0,c*dt.scaled(sx,df=1,mean=a,sd)) < f(sx), sx, NA)}))
+  }
   if (abs(integrate(f,lb,ub)$val-1)>0.001){
     stop("Error: not a pdf.The area under the function you given should be 1")
   }
