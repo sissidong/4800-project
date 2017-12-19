@@ -7,7 +7,6 @@
 #' @param N the nimber of attempted samples.
 #' @param lb lower bound of support of f
 #' @param ub upper bound of support of f
-#' @param maxf the maximum value of the given function f
 #'
 #' @return A vector containing samples from pdf
 #' @export
@@ -16,8 +15,9 @@
 #'
 #'
 
-oneDsample <- function(f, N, lb, ub, maxf) {
+oneDsample <- function(f, N, lb, ub) {
   ones <- runif(N, lb, ub)
+  maxf <- max(f(runif(100000,lb,ub)))
   unis <- runif(N, 0, maxf)
   ones[unis < f(ones)]
 }
