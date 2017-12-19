@@ -21,14 +21,15 @@
 #'f<- function(x) {ifelse(-1< x & x < 0, 2*(x+1), 0)}
 #'oneDsampleplot(oneDsample(f,20000,-1,0,method='unif'))
 #'
-#'f = function(x) {ifelse(0 <= x & x <= 2*pi ,1/2/pi *(sin(x) + 1),0)}
-#'oneDsampleplot(oneDsample(f,50000,0,2*pi))
-#'
 #'f<- function(x) dlnorm(x,mean=0,sdlog=1)
 #'oneDsampleplot(oneDsample(f,50000,'norm'))
 #'
 #'f<- function(x) dnorm(x,-10,2)
 #'oneDsampleplot(oneDsample(f,method='t'))
+#'
+#'f = function(x) {ifelse(0 <= x & x <= 2*pi ,1/2/pi *(sin(x) + 1),0)}
+#'oneDsampleplot(oneDsample(f,50000,0,2*pi))
+#'
 #'
 unif<-function(f, N=50000, lb, ub){
   maxf<-optimize(f,c(lb,ub),maximum = TRUE)
