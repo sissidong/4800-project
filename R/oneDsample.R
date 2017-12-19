@@ -8,7 +8,7 @@
 #' @param N       The number of attempted samples.  Default value is 50000.
 #' @param lb      lower bound of support of f.      Default value is Inf.
 #' @param ub      upper bound of support of f.      Default value is Inf.
-#' @param method  There are three method you can choose, 'norm'or 'unif'.
+#' @param method  There are three method you can choose, 'norm', 't' or 'unif'.
 #'                Defalt method will be the best method we select for your pdf
 
 #' @return A vector containing samples from pdf (including NA)
@@ -32,7 +32,7 @@
 #'oneDsampleplot(oneDsample(f,50000,'norm'))
 #'
 #'f<- function(x) dnorm(x,-10,2)
-#'oneDsampleplot(oneDsample(f))
+#'oneDsampleplot(oneDsample(f,method='t'))
 #'
 #'f<- function(x) 1/(pi*(1+x^2))
 #'oneDsampleplot(oneDsample(f))
@@ -56,6 +56,16 @@ norm<-function(f, N=50000){
   data.frame(x = replicate(N, {sx <- rnorm(1,a,sd); ifelse( runif(1,0,c*dnorm(sx,a,sd)) < f(sx), sx, NA)}))
 }
 
+t<-function(f,N=50000){
+  x<-runif(100000,-1000,1000)
+  maxf<-max(f(x))
+  a=x[which( f(x) == maxf )]
+  a=mean(a)
+  sd=2/maxf
+  c=2*maxf/dt.scaled(a,df=1,mean=a,sd)
+  data.frame(x = replicate(N, {sx <- rt.scaled(1,1,mean=a,sd);
+  ifelse( runif(1,0,c*dt.scaled(sx,df=1,mean=a,sd)) < f(sx), sx, NA)}))
+}
 
 oneDsample <- function(f, N=50000, lb=Inf, ub=Inf,method='best') {
   if (abs(integrate(f,lb,ub)$val-1)>0.001){
@@ -66,6 +76,7 @@ oneDsample <- function(f, N=50000, lb=Inf, ub=Inf,method='best') {
       if(lb!=Inf & ub!=Inf){unif(f,N,lb,ub)}
       else{norm(f,N)}
     }
+    else if(method=='t'){t(f,N)}
     else if(method=='norm'){norm(f,N)}
     else if(method=='unif'){
       if(lb!=Inf & ub!=Inf){unif(f,N,lb,ub)}
