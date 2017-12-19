@@ -1,12 +1,15 @@
 Package: RejectionSample
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Rejection Sampling
+Version: 6.66
+Author: Sissi Dong
+Maintainer: Sissi <dongxiaofu1130@gmail.com>
+Description: Rejection sampling is a basic technique used to generate observations from a continuous distribution which is  close to the pdf function the user give.
+License: Sissi's administration
 Encoding: UTF-8
 Imports: ggplot2,metRology,cubature
 LazyData: true
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

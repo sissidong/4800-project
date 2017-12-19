@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #'
 #' f<- function(x) dnorm(x,-10,2)
 #' EoneD(f,10000, Inf, Inf)

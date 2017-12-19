@@ -16,7 +16,7 @@
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #'
 #'f<- function(x) {ifelse(-1< x & x < 0, 2*(x+1), 0)}
 #'oneDsampleplot(oneDsample(f,20000,-1,0,method='unif'))

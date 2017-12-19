@@ -13,9 +13,9 @@
 #'
 #' @return  probability of given pdf (with one r.v.) and situation
 #'
-#' @export
+#' @export the probability o
 #'
-#' @example
+#' @examples
 #'
 #' f<- function(x) dnorm(x,-10,2)
 #' prooneD(f,10000, Inf, Inf,vall=-10, valu=15)

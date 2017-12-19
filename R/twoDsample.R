@@ -16,17 +16,14 @@
 #'
 #' @export
 #'
-#' @example
-#'f <- function(x){
+#' @examples
+#' f <- function(x){
 #' x1 = x[1]
 #' x2 = x[2]
 #' ifelse(0<x1 & x1<1 & 0<x2 & x2<1 & 0<x1+x2 & x1+x2<1, 24*x1*x2, 0)}
-#'a <- twoDsample(f , N=1000, lbx = 0, ubx = 1, lby = 0, uby = 1)
-#¡¯ggplot(a, aes(x, y)) +  geom_density_2d()
-
-
-
-
+#' a <- twoDsample(f , N=1000, lbx = 0, ubx = 1, lby = 0, uby = 1)
+#' ggplot(a, aes(x, y)) +  geom_density_2d()
+#'
 
 twoDsample <- function(f, N, lbx=-5000, ubx=5000, lby=-5000, uby=5000) {
   if (abs(adaptIntegrate(f, c(lbx, lby), c(ubx, uby), maxEval=10000)$integral - 1) > 0.001) {
