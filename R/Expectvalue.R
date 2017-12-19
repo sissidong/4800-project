@@ -1,15 +1,12 @@
 #' Single variable Rejection Sampling
 #'
 #' This function 'EoneD(f,N,lb,up)' shows the Expect value of the given pdf (with one r.v.) by using single variabel rejection sampling.
-#'
-#'
-
 
 #' @param f the pdf that we are sampling from
 #' @param N the nimber of attempted samples.
 #' @param lb lower bound of support of f
 #' @param ub upper bound of support of f
-
+#'
 #' @return  mean of given pdf (with one r.v.)
 #'
 #' @export
